@@ -8,6 +8,7 @@ import getColoredTime from "../../utils/getColoredTime";
 
 const data = [
   {
+    id: "1",
     img: { src: "/assets/images/museum.jpg", alt: "musuem" },
     title: "Picturesque auditorium with a thousand people capacity",
     description:
@@ -44,6 +45,7 @@ const data = [
     ],
   },
   {
+    id: "2",
     img: { src: "/assets/images/house.avif", alt: "musuem" },
     title: "Picturesque auditorium with a thousand people capacity",
     description:
@@ -80,6 +82,7 @@ const data = [
     ],
   },
   {
+    id: "3",
     img: { src: "/assets/images/house-garden.jpg", alt: "musuem" },
     title: "Picturesque auditorium with a thousand people capacity",
     description:
@@ -130,7 +133,7 @@ const ListingsPage = () => {
         </h3>
         <div className={styles.listingList}>
           {data.map((listing) => (
-            <Hero {...listing} />
+            <Hero {...listing} key={listing.id} />
           ))}
         </div>
       </div>

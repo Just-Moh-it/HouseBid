@@ -12,7 +12,7 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" passHref>
             <a className={styles.logo}>
-              <Image width={64} height={65} src="/assets/images/logo.svg" />
+              <Image width={64} height={65} src="/assets/images/logo.svg" alt="logo" />
             </a>
           </Link>
 
@@ -28,7 +28,7 @@ const Header = () => {
               className={[styles.searchBtn, "btn"].join(" ")}
             >
               {/* Icon */}
-              <Image src="/assets/icons/search.svg" width="20" height="20" />
+              <Image src="/assets/icons/search.svg" width="20" height="20" alt="search" />
             </button>
           </div>
         </div>
@@ -39,11 +39,11 @@ const Header = () => {
           <Popover className={styles.categoryWrapper}>
             {/* Icon */}
             <Popover.Button className={styles.categoryBtn}>
-              <Image src="/assets/icons/rise.svg" width="26" height="16" />
+              <Image src="/assets/icons/rise.svg" width="26" height="16" alt="category" />
               {/* Text */}
               <span className={styles.text}>Looking for</span>
               {/* Dropdown Icon */}
-              <Image src="/assets/icons/down-arrow.svg" width="16" height="8" />
+              <Image src="/assets/icons/down-arrow.svg" width="16" height="8" alt="category" />
             </Popover.Button>
 
             <Popover.Panel>Categories here...</Popover.Panel>
@@ -59,7 +59,7 @@ const Header = () => {
           {/* User Avatar Popover */}
           <Popover className={styles.avatarWrapper}>
             <Popover.Button>
-              <Image src="/assets/images/avatar.png" height="65" width="65" />
+              <Image src="/assets/images/avatar.png" height="65" width="65" alt="avatar" />
             </Popover.Button>
 
             <Popover.Panel className="absolute z-10">Hello world</Popover.Panel>
