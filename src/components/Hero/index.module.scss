@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  margin: 10px 0;
+
+  .imageWrapper {
+    width: 40%;
+    height: 300px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: $shadow-main;
+  }
+
+  .contentWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    .title {
+      margin: 15px 0;
+    }
+
+    .description {
+      color: $tertiary-main;
+      width: 80%;
+      margin: 15px 0;
+    }
+  }
+}
+
+.subHeadingWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: $tertiary-main;
+
+  .tagsWrapper,
+  .sideWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    .tag,
+    .sideItem {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: space-between;
+    }
+  }
+  .iconWrapper {
+    margin-bottom: -4px;
+  }
+
+  .sideWrapper {
+    flex-grow: 1;
+    border-left: 1px solid $tertiary-main;
+    margin-left: 10px;
+    padding-left: 10px;
+  }
+}
+
+.statsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+
+  .stat {
+    font-family: "Roboto";
+    .key {
+      font-size: 18px;
+      color: $tertiary-main;
+      margin-top: 8px;
+    }
+    .value {
+      margin: 5px 0 0;
+      font-size: 25px;
+      font-weight: 600;
+      color: $primary-lightest;
+    }
+  }
+}

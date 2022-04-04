@@ -1,0 +1,150 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 40px;
+
+  // Activity Table
+  .activityTable {
+    box-shadow: $shadow-main;
+    background-color: $bg-light;
+    border-radius: 15px;
+    height: 80vh;
+    overflow: hidden;
+    border: none;
+    border-collapse: collapse;
+
+    text-align: left;
+    font-family: "Epilogue";
+    font-style: normal;
+    font-size: 18px;
+    line-height: 135%;
+
+    th {
+      background-color: $bg-darkest;
+      padding: 24px 0;
+      font-weight: 500;
+
+      color: $primary;
+
+      &:first-child {
+        padding-left: 40px;
+      }
+      &:last-child {
+        padding-right: 40px;
+      }
+    }
+    tr {
+      padding: 24px 0;
+      color: $tertiary-main;
+      &:first-child {
+        padding-left: 40px;
+      }
+      &:last-child {
+        padding-right: 40px;
+      }
+
+      // Listing
+      .listing {
+        margin: 15px 40px;
+      }
+
+      .listing,
+      .bidder {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        .imgWrapper {
+          width: 83px;
+          height: 61px;
+          border-radius: 5px;
+          overflow: hidden;
+          position: relative;
+        }
+        .title {
+          line-height: 135%;
+          color: $primary;
+        }
+        .subtext {
+          line-height: 135%;
+          font-size: 15px;
+
+          color: $tertiary-main;
+        }
+      }
+
+      // Tags
+      .tags {
+      }
+
+      // Amount
+      .amount {
+        color: $accent;
+      }
+
+      // Bidder
+      .bidder {
+        .imgWrapper {
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+        }
+      }
+      // display: inline-flex;
+    }
+  }
+
+  // Payments
+  .paymentWrapper {
+    font-family: "Epilogue";
+    overflow: hidden;
+    border-radius: 15px;
+    .balanceWrapper {
+      padding-top: 0;
+      margin-top: 0;
+      background: linear-gradient(
+          180.02deg,
+          unquote($bg-light + "00") 0.02%,
+          $bg-light 27.75%,
+          $bg-light 62.41%
+        ),
+        linear-gradient(90.11deg, #a4f27f 0.04%, #dcf188 36.7%, #a4eaf6 99.86%);
+
+      // Align Center
+      text-align: center;
+      & > * {
+        margin: 15px auto;
+      }
+
+      // Label
+      .value {
+        font-weight: 700;
+        font-size: 51.9718px;
+        line-height: 135%;
+
+        color: $primary-lightest;
+      }
+
+      // Icon
+      .iconWrapper {
+        padding: 35px;
+        border-radius: 50%;
+        width: max-content;
+        background-color: $accent-light;
+      }
+
+      // Button
+      .btn {
+        background-color: $accent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        font-size: 18px;
+        span {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+}

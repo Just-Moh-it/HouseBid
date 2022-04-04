@@ -1,0 +1,40 @@
+.wrapper {
+  padding: 40px;
+  border-radius: 10px;
+  background-color: $secondary;
+  color: $bg-light;
+  position: relative;
+  font-family: "Epilogue";
+  font-size: 32px;
+
+  .contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    .content {
+      flex-grow: 1;
+      font-weight: 600;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border: 50px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+
+    width: 70px;
+    height: 70px;
+  }
+
+  &::before {
+    top: -60%;
+    right: 20%;
+  }
+  &::after {
+    bottom: -60%;
+    right: 5%;
+  }
+}

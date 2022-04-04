@@ -1,0 +1,74 @@
+.wrapper {
+  width: 100%;
+  background-color: $bg-light;
+  box-shadow: $shadow-main;
+
+  padding: 52px;
+  border-radius: 25px;
+
+  .heading {
+    font-family: "Epilogue";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32.1046px;
+    line-height: 165%;
+
+    text-align: center;
+
+    color: $primary-lightest;
+    padding: 17px 70px;
+    border-radius: 25px;
+    background-color: $bg-dark;
+    width: max-content;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+
+  .formRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1;
+    gap: 60px;
+  }
+
+  .errorMessage {
+    color: $error;
+    font-family: "Epilogue";
+    font-size: 18px;
+  }
+
+  .textAreaInput {
+    resize: vertical;
+  }
+
+  .submitButton {
+    background-color: $accent;
+    display: block;
+    font-size: 18px;
+    margin: 20px auto;
+  }
+
+  .fileUploadWrapper {
+    color: $tertiary-main;
+    align-items: center;
+    text-align: center;
+    font-weight: 500;
+    border: 0px;
+    position: relative;
+    overflow: hidden;
+
+    &:before {
+      $distance: 10px;
+      content: "";
+      position: absolute;
+      border: $distance dashed $tertiary-light;
+      top: -($distance - 1);
+      bottom: -($distance - 1);
+      left: -($distance - 1);
+      right: -($distance - 1);
+    }
+  }
+
+}

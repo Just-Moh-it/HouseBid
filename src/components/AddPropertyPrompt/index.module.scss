@@ -1,0 +1,35 @@
+.wrapper {
+  background-color: $bg-light;
+  box-shadow: $shadow-main;
+  padding: 25px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border-radius: 25px;
+
+
+  .iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: $secondary;
+    color: $primary-light;
+    border-radius: 50%;
+  }
+
+  .content {
+    flex-grow: 1;
+
+    .description {
+      color: $tertiary-main;
+    }
+    .sublink {
+      color: $accent;
+    }
+  }
+  .button {
+    font-size: 18px;
+  }
+}

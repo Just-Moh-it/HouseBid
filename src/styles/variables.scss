@@ -1,0 +1,50 @@
+
+// Colors
+$primary: #171721;
+$primary-light: #2c3033;
+$primary-lightest: #49505a;
+
+$secondary: #8d6dfe;
+$secondary-light: unquote($secondary + "19");
+
+$accent: #4bcd8d;
+$accent-light: unquote($accent + "19");
+
+$tertiary-main: #a1a1a3;
+$tertiary-light: #b5b5b7;
+
+$bg-darkest: #f0f0f0;
+$bg-dark: #fcfcfe;
+$bg-light: #ffffff;
+
+$warning: #f4a527;
+$warning-light: #fff0d4;
+$error: #bd6d6f;
+$error-light: #f8eef0;
+html[data-theme="dark"] {
+  // Light Theme
+  $primary: #ffffff;
+  $primary-light: #f0f0f0;
+  $primary-lightest: #ececec;
+
+  $secondary: #8d6dfe;
+  $secondary-light: #eee9fd;
+
+  $accent: #4bcd8d;
+  $accent-light: #e5fff6;
+
+  $tertiary-main: #eaeaea;
+  $tertiary-light: #f3f3f3;
+
+  $bg-darkest: #000000;
+  $bg-dark: #1d1d1d;
+  $bg-light: #2c2c2c;
+
+  $warning: #f4a527;
+  $warning-light: #fff0d4;
+  $error: #bd6d6f;
+  $error-light: #f8eef0;
+}
+
+// Shadows
+$shadow-main: 2px 4px 49px unquote($primary + "0C");

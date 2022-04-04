@@ -1,0 +1,64 @@
+.container {
+  overflow: visible;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  // Left Styles
+  .left {
+    display: inline-flex;
+    gap: 40px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+
+  .searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 100px;
+    box-shadow: $shadow-main;
+    padding: 4px 10px;
+    background-color: $bg-light;
+
+    .searchTextBox {
+      margin: 10px 20px 10px 25px;
+      font-size: 18px;
+      color: $primary;
+      border: none;
+      outline: none;
+      min-width: 20vw;
+    }
+
+    .searchBtn {
+      padding: 14px 30px;
+      background-color: $accent;
+      border-radius: 100px;
+    }
+  }
+
+  // Right Styles
+  .right {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .categoryWrapper {
+    .categoryBtn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      span {
+        font-size: 18px;
+      }
+
+      &:hover {
+      }
+    }
+  }
+}
