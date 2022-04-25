@@ -6,6 +6,7 @@
   // Activity Table
   .activityTable {
     box-shadow: $shadow-main;
+
     background-color: $bg-light;
     border-radius: 15px;
     height: 80vh;
@@ -95,21 +96,24 @@
   }
 
   // Payments
-  .paymentWrapper {
+  .rightWrapper {
     font-family: "Epilogue";
     overflow: hidden;
     border-radius: 15px;
+    height: max-content;
+    background: linear-gradient(
+        180.02deg,
+        unquote($bg-light + "00") 0.02%,
+        $bg-light 27.75%,
+        $bg-light 62.41%
+      ),
+      linear-gradient(90.11deg, #a4f27f 0.04%, #dcf188 36.7%, #a4eaf6 99.86%);
+
+    // Balance
     .balanceWrapper {
       padding-top: 0;
       margin-top: 0;
-      background: linear-gradient(
-          180.02deg,
-          unquote($bg-light + "00") 0.02%,
-          $bg-light 27.75%,
-          $bg-light 62.41%
-        ),
-        linear-gradient(90.11deg, #a4f27f 0.04%, #dcf188 36.7%, #a4eaf6 99.86%);
-
+      padding-top: 50px;
       // Align Center
       text-align: center;
       & > * {
@@ -143,6 +147,65 @@
         font-size: 18px;
         span {
           flex-grow: 1;
+        }
+      }
+    }
+
+    // Payments
+    .paymentsWrapper {
+      margin: 70px 40px;
+
+      // Header
+      .headerWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px 0;
+        .link {
+          color: $secondary;
+        }
+      }
+      .paymentsList {
+        .paymentItem {
+          width: 100%;
+          display: block;
+          margin: 30px 0;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: space-between;
+
+          .left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: space-between;
+            .imgWrapper {
+              width: 72px;
+              height: 72px;
+              padding: 10px;
+              background-color: $bg-darkest;
+              border-radius: 10px;
+            }
+            .title {
+              line-height: 135%;
+              color: $primary;
+            }
+            .subtext {
+              line-height: 135%;
+              font-size: 15px;
+              color: $tertiary-main;
+            }
+          }
+
+          .amount {
+            &.deducted {
+              color: $error;
+            }
+            &.added {
+              color: $accent;
+            }
+          }
         }
       }
     }

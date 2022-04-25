@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import styles from "./index.module.scss";
-import Image from "next/image";
 import Link from "next/link";
-import { Popover } from "@headlessui/react";
+import { useSession, signIn } from "next-auth/react";
+import AvatarPopover from "./AvatarPopover";
+import TagsPopover from "./TagsPopover";
+import Image from "next/image";
 
 const Header = () => {
+  const { status } = useSession();
+
   return (
     <>
       <header className={styles.container}>
@@ -12,7 +17,12 @@ const Header = () => {
           {/* Logo */}
           <Link href="/" passHref>
             <a className={styles.logo}>
-              <Image width={64} height={65} src="/assets/images/logo.svg" alt="logo" />
+              <Image
+                width={64}
+                height={65}
+                src="/assets/images/logo.svg"
+                alt="logo"
+              />
             </a>
           </Link>
 
@@ -24,46 +34,52 @@ const Header = () => {
               placeholder="Search for properties"
             />
             {/* Search Button */}
-            <button
-              className={[styles.searchBtn, "btn"].join(" ")}
-            >
+            <button className={[styles.searchBtn, "btn"].join(" ")}>
               {/* Icon */}
-              <Image src="/assets/icons/search.svg" width="20" height="20" alt="search" />
+              <Image
+                src="/assets/icons/search.svg"
+                width="20"
+                height="20"
+                alt="search"
+              />
             </button>
           </div>
         </div>
 
         {/* Right Bar */}
         <div className={styles.right}>
-          {/* Category Selector */}
-          <Popover className={styles.categoryWrapper}>
-            {/* Icon */}
-            <Popover.Button className={styles.categoryBtn}>
-              <Image src="/assets/icons/rise.svg" width="26" height="16" alt="category" />
-              {/* Text */}
-              <span className={styles.text}>Looking for</span>
-              {/* Dropdown Icon */}
-              <Image src="/assets/icons/down-arrow.svg" width="16" height="8" alt="category" />
-            </Popover.Button>
+          {/* Tags Selector */}
+          <TagsPopover />
 
-            <Popover.Panel>Categories here...</Popover.Panel>
-          </Popover>
+          {
+            {
+              loading: <></>,
+              authenticated: (
+                <>
+                  {/* Add Proprty CTA */}
+                  <Link href="/listings/create" passHref>
+                    <a
+                      className={[styles.addProperty, "btn primary"].join(" ")}
+                    >
+                      Add your listing
+                    </a>
+                  </Link>
 
-          {/* Add Proprty CTA */}
-          <Link href="/listings/create" passHref>
-            <a className={[styles.addProperty, "btn primary"].join(" ")}>
-              Add your property
-            </a>
-          </Link>
-
-          {/* User Avatar Popover */}
-          <Popover className={styles.avatarWrapper}>
-            <Popover.Button>
-              <Image src="/assets/images/avatar.png" height="65" width="65" alt="avatar" />
-            </Popover.Button>
-
-            <Popover.Panel className="absolute z-10">Hello world</Popover.Panel>
-          </Popover>
+                  {/* User Avatar Popover */}
+                  <AvatarPopover />
+                </>
+              ),
+              unauthenticated: (
+                // Login Button
+                <button
+                  className={["btn secondary", styles.loginBtn].join(" ")}
+                  onClick={signIn}
+                >
+                  Login
+                </button>
+              ),
+            }[status]
+          }
         </div>
       </header>
     </>

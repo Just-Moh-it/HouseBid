@@ -1,7 +1,7 @@
-import styles from "index.module.scss";
+import styles from "./index.module.scss";
 import { motion } from "framer-motion";
 
-const PropertyCard = ({
+const PropertyItemSmall = ({
   cover: { coverSrc, coverAlt },
   heading,
   title,
@@ -36,4 +36,4 @@ const PropertyCard = ({
   );
 };
 
-export default PropertyCard;
+export default PropertyItemSmall;

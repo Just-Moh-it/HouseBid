@@ -19,14 +19,24 @@ button {
   border: none;
   color: inherit;
   background-color: inherit;
+  cursor: pointer;
 }
 
 * {
   box-sizing: border-box;
 }
 
+hr {
+  border: none;
+  border-top: 1px solid $bg-darkest;
+}
+
 .btn {
+  padding: 14px 31px;
   font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 18px;
 
   &:hover {
     filter: opacity(90%);
@@ -34,10 +44,25 @@ button {
   }
 
   &.primary {
-    padding: 14px 31px;
     background: $secondary;
     color: $bg-light;
-    border-radius: 10px;
+  }
+
+  &.outline {
+    background: transparent;
+    outline: 2px solid $secondary;
+    outline-offset: -2px;
+    color: $secondary;
+  }
+
+  &.secondary {
+    background: transparent;
+    color: $secondary;
+    border: 2px solid transparent;
+
+    &:hover {
+      background-color: unquote($secondary + "19");
+    }
   }
 }
 
@@ -166,4 +191,50 @@ p {
 
   color: $primary-lightest;
   outline-color: $accent;
+}
+
+.popover-panel-base {
+  position: absolute;
+  z-index: 10;
+  margin-top: 5px;
+  transform: translateX(-50%);
+  min-width: 100px;
+  min-height: 200px;
+  box-shadow: $shadow-main;
+  padding: 25px 15px;
+  background-color: $bg-light;
+  border-radius: 10px;
+
+  button {
+    text-align: inherit;
+  }
+
+  .link {
+    width: 100%;
+    min-width: max-content;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    margin: 5px;
+    display: inline-block;
+
+    transition: all 0.1s ease-in-out;
+
+    svg {
+      margin-bottom: -3px;
+      margin-right: 8px;
+    }
+
+    &:hover {
+      background-color: $accent-light;
+      color: $accent;
+      text-decoration: underline;
+
+      &.danger {
+        background-color: $error-light;
+        color: $error;
+      }
+    }
+  }
 }

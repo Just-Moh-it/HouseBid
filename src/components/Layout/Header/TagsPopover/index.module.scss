@@ -1,0 +1,15 @@
+.categoryWrapper {
+  .categoryBtn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    span {
+      font-size: 18px;
+    }
+
+    &:hover {
+    }
+  }
+}

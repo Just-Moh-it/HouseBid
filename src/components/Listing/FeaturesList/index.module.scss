@@ -1,0 +1,38 @@
+.wrapper {
+  display: grid;
+  // Responsive grid with 4 columns in full width
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 30px));
+  gap: 30px;
+  width: 100%;
+
+  .featureItem {
+    width: 100%;
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      color: $tertiary-main;
+      margin-bottom: 4px;
+
+      .icon {
+        flex-shrink: 0;
+        margin-bottom: -2px;
+      }
+      .key {
+        width: 100%;
+        display: block;
+      }
+    }
+
+    .value {
+      color: $primary-light;
+      width: 100%;
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

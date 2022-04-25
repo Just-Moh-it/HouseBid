@@ -46,19 +46,10 @@
     gap: 30px;
   }
 
-  .categoryWrapper {
-    .categoryBtn {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      span {
-        font-size: 18px;
-      }
-
-      &:hover {
-      }
-    }
+  .loginBtn {
+    font-size: 18px;
+    border: 2px solid $secondary;
+    color: $secondary;
+    background-color: transparent;
   }
 }

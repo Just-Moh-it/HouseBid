@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useTheme from "../../../utils/useTheme";
 import { BiSun } from "react-icons/bi";
+import { signOut } from "next-auth/react";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -14,7 +15,7 @@ const Navbar = () => {
       <div className={styles.top}>
         <NavItem
           icon={{ src: "/assets/icons/Cubes.svg", alt: "Explore" }}
-          href="/explore"
+          href="/"
         />
         <NavItem
           icon={{ src: "/assets/icons/Announce.svg", alt: "Your Listings" }}
@@ -30,7 +31,8 @@ const Navbar = () => {
         />
         <NavItem
           icon={{ src: "/assets/icons/Logout.svg", alt: "Logout >" }}
-          href="/logout"
+          href="/api/auth/signout"
+          onClick={() => signOut()}
         />
       </div>
 
@@ -55,9 +57,11 @@ const NavItem = ({ href = "/", icon: { src, alt, width, height } }) => {
       <a
         className={[
           styles.navItem,
-          href === "/"
-            ? router.pathname === href
-            : router.pathname.startsWith(href)
+          (
+            href === "/"
+              ? router.pathname === href
+              : router.pathname.startsWith(href)
+          )
             ? styles.active
             : "",
         ].join(" ")}

@@ -19,8 +19,7 @@ const AddProprtyPrompt = () => {
         <h2 className="h2">Add Your Property</h2>
         {/* Description */}
         <p className={["p-wide", styles.description].join(" ")}>
-          Add your property for auction, and sell it at the most reasonable
-          price
+          Add your listing for auction, and sell it at the most reasonable price
         </p>
         {/* SubLink */}
         <Link href="#" passHref>

@@ -7,9 +7,11 @@ import Link from "next/link";
 import { FaWallet } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 
-const ActivityPage = ({ data }) => {
+const ActivityPage = ({
+  data: { activity: activityData, payments: paymentData },
+}) => {
   return (
-    <Layout>
+    <Layout isRestricted>
       <article className={styles.wrapper}>
         {/* Activity Table */}
         <table className={styles.activityTable}>
@@ -22,14 +24,14 @@ const ActivityPage = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((row) => (
-              <TableRow data={row} key={Math.random()} />
+            {activityData?.map((row) => (
+              <ActivityTableRow data={row} key={Math.random()} />
             ))}
           </tbody>
         </table>
 
         {/* Payments */}
-        <motion.div className={styles.paymentWrapper}>
+        <motion.div className={styles.rightWrapper}>
           {/* Balance */}
           <div className={styles.balanceWrapper}>
             {/* Icon */}
@@ -48,15 +50,29 @@ const ActivityPage = ({ data }) => {
             </button>
           </div>
 
-          {/* All Activity */}
-          <div className={styles.activityWrapper}></div>
+          {/* All Payments */}
+          <div className={styles.paymentsWrapper}>
+            <div className={styles.headerWrapper}>
+              <h3 className={["h3-large", styles.heading].join(" ")}>
+                Activity
+              </h3>
+              <Link href="#" passHref>
+                <a className={["h4-bold", styles.link].join(" ")}>View All</a>
+              </Link>
+            </div>
+            <div className={styles.paymentsList}>
+              {paymentData?.slice(0, 5).map((payment) => (
+                <PaymentItem data={payment} />
+              ))}
+            </div>
+          </div>
         </motion.div>
       </article>
     </Layout>
   );
 };
 
-const TableRow = ({ data: { listing, tags, amount, bidder } }) => {
+const ActivityTableRow = ({ data: { listing, tags, amount, bidder } }) => {
   return (
     <tr className={styles.tr}>
       <td className={styles.listing}>
@@ -101,15 +117,61 @@ const TableRow = ({ data: { listing, tags, amount, bidder } }) => {
   );
 };
 
+const PaymentItem = ({
+  data: { provider, date, time, amount, isWithdraw },
+}) => (
+  <>
+    <div className={styles.paymentItem}>
+      {/* Left */}
+      <div className={styles.left}>
+        <div className={styles.imgWrapper}>
+          <Image
+            src={provider.imgURI}
+            alt={provider.name}
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className={styles.content}>
+          <h5 className={[styles.title, "h4-bold"].join(" ")}>
+            {provider.name}
+          </h5>
+          <p className={[styles.subtext, "p-wide"].join(" ")}>
+            {date}, {time}
+          </p>
+        </div>
+      </div>
+
+      {/* Right */}
+      <div className={styles.right}>
+        <p
+          className={[
+            styles.amount,
+            "h3-mid",
+            isWithdraw ? styles.deducted : styles.added,
+          ].join(" ")}
+        >
+          {amount}
+        </p>
+      </div>
+    </div>
+  </>
+);
+
+import { getSession } from "next-auth/react";
+
+
 export const getServerSideProps = async () => {
+  const session = await getSession({ req });
   return {
     props: {
-      data: dummyData,
+      session,
+      data: { activity: dummyActivityData, payments: dummyPaymentData },
     },
   };
 };
 
-const dummyData = [...Array(16)].map((i) => ({
+const dummyActivityData = [...Array(16)].map((i) => ({
   id: "1231",
   listing: {
     img: { src: "/assets/images/museum.jpg", alt: "Museum" },
@@ -118,7 +180,7 @@ const dummyData = [...Array(16)].map((i) => ({
     url: "/listing/1231",
   },
   tags: ["Penthouse"],
-  amount: "$5,800",
+  amount: "£5,800",
   bidder: {
     name: "Janice Spartan",
     url: "/profile/janice",
@@ -126,4 +188,13 @@ const dummyData = [...Array(16)].map((i) => ({
     date: "25 Oct, 2015",
   },
 }));
+
+const dummyPaymentData = [...Array(15)].map((_) => ({
+  provider: { name: "PayPal", imgURI: "/assets/icons/PayPal.svg" },
+  date: "31 Oct, 2021",
+  time: "11:00 pm",
+  amount: "£500",
+  isWithdraw: Math.random < 0.5,
+}));
+
 export default ActivityPage;

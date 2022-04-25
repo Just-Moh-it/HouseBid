@@ -6,5 +6,9 @@
 
   .contentWrapper {
     flex-grow: 1;
+
+    & > *:not(:first-of-type) {
+      margin-top: 25px;
+    }
   }
 }

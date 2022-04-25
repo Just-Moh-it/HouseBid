@@ -1,0 +1,13 @@
+.avatarWrapper {
+  .button {
+    height: 65px;
+    width: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .panel {
+    transform: translateX(-70%);
+  }
+}
