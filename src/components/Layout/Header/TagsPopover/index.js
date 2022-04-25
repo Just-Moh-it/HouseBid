@@ -44,7 +44,7 @@ const TagsPopover = () => {
         {error && <p>Error...</p>}
         {tagsData?.length &&
           tagsData.map(({ label, value }) => (
-            <PopoverLink href="/">
+            <PopoverLink href="/" key={value}>
               {tagOptions.filter((x) => x.value === value)[0]?.icon} {label}
             </PopoverLink>
           ))}

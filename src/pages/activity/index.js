@@ -61,8 +61,8 @@ const ActivityPage = ({
               </Link>
             </div>
             <div className={styles.paymentsList}>
-              {paymentData?.slice(0, 5).map((payment) => (
-                <PaymentItem data={payment} />
+              {paymentData?.slice(0, 5).map((payment, i) => (
+                <PaymentItem data={payment} key={i} />
               ))}
             </div>
           </div>
@@ -159,7 +159,6 @@ const PaymentItem = ({
 );
 
 import { getSession } from "next-auth/react";
-
 
 export const getServerSideProps = async () => {
   const session = await getSession({ req });

@@ -136,7 +136,7 @@ const PropertyPage = () => {
                 <div className={styles.featuresList}>
                   {listingData.listing_features.map(
                     ({ feature: { title, value } }) => (
-                      <div className={styles.featureItem}>
+                      <div className={styles.featureItem} key={value}>
                         {/* Icon */}
                         <div className={styles.icon}>
                           {

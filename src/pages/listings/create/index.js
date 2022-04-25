@@ -120,7 +120,9 @@ const CreateListingPage = () => {
               }
               Object.keys(placeholderData).forEach((i) => {
                 setValue(i, placeholderData[i]);
-                setImages(placeholderData.images.sort(() => Math.random() - 0.5));
+                setImages(
+                  placeholderData.images.sort(() => Math.random() - 0.5)
+                );
               });
             }}
           >
@@ -327,7 +329,7 @@ const FileUpload = ({
         <div className={styles.imagesWrapper}>
           {/* Images */}
           {images.map((image, i) => (
-            <div className={styles.item}>
+            <div className={styles.item} key={i}>
               <div className={styles.imageWrapper}>
                 <Image
                   src={image}

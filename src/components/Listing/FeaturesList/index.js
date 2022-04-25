@@ -4,7 +4,7 @@ const FeaturesList = ({ features }) => {
   return (
     <div className={styles.wrapper}>
       {features.map(({ icon, key, value }) => (
-        <div className={styles.featureItem}>
+        <div className={styles.featureItem} key={value}>
           <div className={styles.top}>
             {/* Icon */}
             <div className={styles.icon}>{icon}</div>
@@ -14,7 +14,7 @@ const FeaturesList = ({ features }) => {
               {key}
             </div>
           </div>
-        
+
           {/* Values */}
           <div className={styles.value}>{value}</div>
         </div>
