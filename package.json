@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "init": "npm run --silent update && clear",
-    "update": "git-pull-all || true"
+    "update": "git pull"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
