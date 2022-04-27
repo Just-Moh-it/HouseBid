@@ -24,7 +24,7 @@ import { useForm } from "react-hook-form";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { useSession } from "next-auth/react";
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from "uuid";
 import Alert from "../../../components/Alert";
 
 import {
@@ -289,6 +289,9 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
           created_at: "asc",
         },
       ],
+      where: {
+        listing_id: { _eq: listingData?.id },
+      },
     },
   });
   const { register, handleSubmit, errors, reset } = useForm();
@@ -391,6 +394,8 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
       ],
     };
   }
+
+  console.log(biddingData);
 
   const onSubmit = (data) => {
     console.log(data);

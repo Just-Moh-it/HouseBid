@@ -104,13 +104,15 @@ export const GET_SINGLE_LISTING = gql`
 `;
 
 export const GET_BIDDINGS_LIVE = gql`
-  subscription getLiveBiddings($orderBy: [bids_order_by!]) {
-    bids(where: { listing_id: { _eq: "20" } }, order_by: $orderBy) {
+  subscription MySubscription(
+    $orderBy: [bids_order_by!]
+    $where: bids_bool_exp
+  ) {
+    bids(order_by: $orderBy, where: $where) {
       is_anonymous
       increment
       user {
         name
-        id
       }
     }
   }
