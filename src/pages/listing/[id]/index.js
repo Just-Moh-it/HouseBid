@@ -305,7 +305,7 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
   const [endBid] = useMutation(UPDATE_LISTING, {
     onError: (err) =>
       toast.error(`Error occured creating bid: ${err?.message}`),
-    onCompleted: ({ insert_bids_one: { id } }) => {
+    onCompleted: () => {
       toast(`Bidding Ended!`);
     },
     variables: {
@@ -406,6 +406,7 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
     });
   };
 
+
   return (
     <div className={styles.biddingsWrapper}>
       <button onClick={toggleIsShowingInfo}>Back</button>
@@ -474,6 +475,7 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
             onClick={(e) => {
               e.preventDefault();
               endBid();
+              console.log(listingData);
             }}
             className={[styles.button, "btn outline"].join(" ")}
           >

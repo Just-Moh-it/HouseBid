@@ -114,6 +114,7 @@ export const GET_BIDDINGS_LIVE = gql`
       increment
       user {
         name
+        id
       }
     }
   }
