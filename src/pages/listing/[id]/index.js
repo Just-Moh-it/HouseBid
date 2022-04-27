@@ -365,7 +365,6 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
   let sumTillNow = listingData?.minimum_price;
 
   if (biddingData?.length) {
-    console.log(sumTillNow);
     data = {
       labels: biddingDataAsc
         .reverse()
@@ -395,10 +394,7 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
     };
   }
 
-  console.log(biddingData);
-
   const onSubmit = (data) => {
-    console.log(data);
     createBid({
       variables: {
         object: {
@@ -409,13 +405,6 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
       },
     });
   };
-
-  if (biddingData?.length) {
-    console.log("Biddings", biddingData);
-    console.log("Ended", listingData?.bidding_ended);
-    console.log("Session User Id", session.user.id);
-    console.log("Winner User Id", biddingData?.slice(-1)[0].user.id);
-  }
 
   return (
     <div className={styles.biddingsWrapper}>
@@ -480,7 +469,7 @@ const BiddingsComponent = ({ toggleIsShowingInfo, listingData }) => {
 
         {/* End Bidding */}
 
-        {session?.user?.id === listingData?.user?.name && (
+        {session?.user?.id === listingData?.user?.id && (
           <button
             onClick={(e) => {
               e.preventDefault();

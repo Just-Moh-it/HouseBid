@@ -72,6 +72,7 @@ export const GET_SINGLE_LISTING = gql`
       created_at
       user {
         name
+        id
       }
       listing_features {
         feature {
