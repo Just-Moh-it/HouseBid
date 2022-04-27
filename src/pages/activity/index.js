@@ -62,7 +62,7 @@ const ActivityPage = ({
             </div>
             <div className={styles.paymentsList}>
               {paymentData?.slice(0, 5).map((payment, i) => (
-                <PaymentItem data={payment} key={i} />
+                <PaymentItem data={payment} key={uuid()} />
               ))}
             </div>
           </div>
@@ -160,7 +160,7 @@ const PaymentItem = ({
 
 import { getSession } from "next-auth/react";
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (req) => {
   const session = await getSession({ req });
   return {
     props: {

@@ -1,13 +1,16 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import styles from "./index.module.scss";
 import Link from "next/link";
 import { useSession, signIn } from "next-auth/react";
 import AvatarPopover from "./AvatarPopover";
 import TagsPopover from "./TagsPopover";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const { status } = useSession();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
@@ -27,11 +30,19 @@ const Header = () => {
           </Link>
 
           {/* Search Bar */}
-          <div className={styles.searchContainer}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              router.push(`/search/${searchQuery}`);
+            }}
+            className={styles.searchContainer}
+          >
             {/* TextBox */}
             <input
               className={styles.searchTextBox}
               placeholder="Search for properties"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             {/* Search Button */}
             <button className={[styles.searchBtn, "btn"].join(" ")}>
@@ -43,7 +54,7 @@ const Header = () => {
                 alt="search"
               />
             </button>
-          </div>
+          </form>
         </div>
 
         {/* Right Bar */}

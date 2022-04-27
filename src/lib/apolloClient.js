@@ -34,6 +34,8 @@ const createWSLink = (token) => {
       {
         lazy: true,
         reconnect: true,
+        inactivityTimeout: 30000,
+
         connectionParams: async () => {
           return {
             headers: { Authorization: `Bearer ${token}` },

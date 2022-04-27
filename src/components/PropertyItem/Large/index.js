@@ -2,6 +2,7 @@ import styles from "./index.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import ContentLoader from "react-content-loader";
+import { v4 as uuid } from 'uuid'
 
 const PropertyItemLarge = ({
   img: { src, alt },
@@ -41,13 +42,13 @@ const PropertyItemLarge = ({
   );
 };
 
-const SubHeadingWrapper = ({ tags, side }) => {
+export const SubHeadingWrapper = ({ tags, side }) => {
   return (
     <div className={styles.subHeadingWrapper}>
       {/* Tags */}
       <div className={styles.tagsWrapper}>
         {tags?.map(({ icon, name }) => (
-          <div className={styles.tag} key={name}>
+          <div className={styles.tag} key={uuid()}>
             {icon}
             <span>{name}</span>
           </div>
@@ -56,7 +57,7 @@ const SubHeadingWrapper = ({ tags, side }) => {
       {/* Side text */}
       <div className={styles.sideWrapper}>
         {side?.map(({ icon, value }) => (
-          <div className={styles.sideItem} key={value}>
+          <div className={styles.sideItem} key={uuid()}>
             {icon}
             <span>{value}</span>
           </div>
@@ -70,7 +71,7 @@ const StatsList = ({ stats }) => {
   return (
     <div className={styles.statsWrapper}>
       {stats?.map(({ key, value }) => (
-        <div className={styles.stat} key={value}>
+        <div className={styles.stat} key={uuid()}>
           <h5 className={styles.value}>{key}</h5>
           <p className={styles.key}>{value}</p>
         </div>
@@ -89,7 +90,7 @@ export const HeroSkeleton = ({ expectedItems, ...props }) => (
         viewBox="0 0 1200 300"
         backgroundColor="#f3f3f3"
         foregroundColor="#ecebeb"
-        key={i}
+        key={uuid()}
         {...props}
       >
         <rect x="1" y="2" rx="22" ry="22" width="590" height="295" />

@@ -40,12 +40,24 @@ export const GET_LISTINGS = gql`
           value
         }
       }
+      location_zip_code
+      location_state
+      location_country_code
+      location_city
+      bidding_ends
+      bids_aggregate {
+        aggregate {
+          sum {
+            increment
+          }
+        }
+      }
     }
   }
 `;
 
 export const GET_SINGLE_LISTING = gql`
-  query Listings_by_pk($listingsByPkId: bigint!) {
+  subscription Listings_by_pk($listingsByPkId: bigint!) {
     listings_by_pk(id: $listingsByPkId) {
       id
       listing_images {
@@ -67,6 +79,57 @@ export const GET_SINGLE_LISTING = gql`
           value
         }
       }
+      listing_tags {
+        tag {
+          label
+          value
+        }
+      }
+      location_country_code
+      location_address
+      location_city
+      location_state
+      location_zip_code
+      bidding_ends
+      bids_aggregate {
+        aggregate {
+          sum {
+            increment
+          }
+          count(columns: id)
+        }
+      }
+    }
+  }
+`;
+
+export const GET_BIDDINGS_LIVE = gql`
+  subscription getLiveBiddings($orderBy: [bids_order_by!]) {
+    bids(where: { listing_id: { _eq: "20" } }, order_by: $orderBy) {
+      is_anonymous
+      increment
+      user {
+        name
+        id
+      }
+    }
+  }
+`;
+export const UPDATE_LISTING = gql`
+  mutation Update_listings_by_pk(
+    $pkColumns: listings_pk_columns_input!
+    $set: listings_set_input
+  ) {
+    update_listings_by_pk(pk_columns: $pkColumns, _set: $set) {
+      bidding_ends
+    }
+  }
+`;
+
+export const CREATE_BID = gql`
+  mutation Insert_bids_one($object: bids_insert_input!) {
+    insert_bids_one(object: $object) {
+      id
     }
   }
 `;

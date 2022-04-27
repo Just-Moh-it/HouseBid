@@ -4,7 +4,7 @@ import Hero from "../../components/PropertyItem/Large";
 import { BiBuildingHouse } from "react-icons/bi";
 import { RiMap2Fill } from "react-icons/ri";
 import AddProprtyPrompt from "../../components/AddPropertyPrompt";
-import getColoredTime from "../../utils/getColoredTime";
+import { getColoredTime } from "../../utils/functions";
 import { useSession } from "next-auth/react";
 import { GET_LISTINGS } from "../../lib/queries/Listing";
 import { useQuery } from "@apollo/client";
@@ -64,7 +64,6 @@ const ListingsPage = () => {
     onError: (error) =>
       toast.error(`Error fetching listings: ${error?.message}`),
   });
-  console.log("Data", personalListingsData);
 
   return (
     <Layout isRestricted>

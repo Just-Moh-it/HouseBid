@@ -12,7 +12,7 @@ const Layout = ({ children, isRestricted }) => {
 
   if (isRestricted && status === "unauthenticated") {
     toast.warning("You need to be authenticated to view this page");
-    router.push("/");
+    typeof window !== "undefined" && router.push("/");
   }
 
   return (
@@ -28,7 +28,7 @@ const Layout = ({ children, isRestricted }) => {
         ) ? (
           <main className={styles.contentWrapper}>{children}</main>
         ) : (
-          <h1>Redirecting...</h1>
+          <h1>Loading...</h1>
         )}
       </div>
       <Footer />
@@ -39,8 +39,6 @@ const Layout = ({ children, isRestricted }) => {
 // Export the `session` prop to use sessions with Server Side Rendering
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-
-  console.log(session);
 
   return {
     props: {

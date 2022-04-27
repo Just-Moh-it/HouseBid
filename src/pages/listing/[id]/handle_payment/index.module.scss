@@ -1,0 +1,14 @@
+.wrapper {
+  .alert {
+    padding: 20px 50px;
+    text-align: center;
+
+    .heading {
+      margin-bottom: 20px;
+    }
+
+    .description {
+      color: $tertiary-main;
+    }
+  }
+}

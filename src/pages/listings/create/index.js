@@ -8,10 +8,18 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import ContentLoader from "react-content-loader";
 import { useRouter } from "next/router";
-import { featureOptions, tagOptions } from "../../../utils/constants";
+import {
+  countryCodeList,
+  featureOptions,
+  tagOptions,
+} from "../../../utils/constants";
+import { v4 as uuid } from 'uuid'
 
-// React Select
+// Extra Inputs
 import Select from "react-select";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 // Data
 import { useMutation } from "@apollo/client";
@@ -26,14 +34,37 @@ const placeholderData = {
   title: "Picturesque museum in the hills",
   shortDescription:
     "Remake - We Make: an exhibition about architecture’s social  agency in the face of urbanisation",
-  tags: "museum, hills, picturesque",
-  features: "compact-parking,cctv,directions",
+  tags: ["3-bhk"],
+  features: ["compact-parking"],
   longDescription: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. \n\nIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum`,
   images: [
     "https://res.cloudinary.com/mohit2004/image/upload/v1650803072/house-bid/uips1byxiva7ckbtlnjf.jpg",
     "https://res.cloudinary.com/mohit2004/image/upload/v1650803066/house-bid/tuqx39b2c7zakbfad0gx.jpg",
     "https://res.cloudinary.com/mohit2004/image/upload/v1650820353/house-bid/srbjkxgz5znxg8kwpwge.jpg",
   ],
+  location: {
+    address: "158 Ada St Ste 205",
+    city: "Armona",
+    zipCode: 93202,
+    state: "California",
+    countryCode: "US",
+  },
+  minimumPrice: "0",
+  minimumIncrement: "500",
+};
+
+const filterPassedTime = (time) => {
+  const currentDate = new Date();
+  const selectedDate = new Date(time);
+
+  return currentDate.getTime() < selectedDate.getTime();
+};
+
+const filterPassedDate = (date) => {
+  const currentDate = new Date();
+  const selectedDate = new Date(date);
+
+  return currentDate.getTime() < selectedDate.getTime();
 };
 
 const CreateListingPage = () => {
@@ -44,9 +75,10 @@ const CreateListingPage = () => {
     formState: { errors },
     setValue,
     getValues,
-  } = useForm();
+  } = useForm({ defaultValues: { biddingEnds: new Date() } });
   const [isImageUploading, setIsImageUploading] = useState(false);
   const [images, setImages] = useState([]);
+  const [date, setDate] = useState("");
 
   const [createListing, { data: mutationData }] = useMutation(CREATE_LISTING, {
     onCompleted: (data) => {
@@ -69,8 +101,9 @@ const CreateListingPage = () => {
     minimumIncrement,
     features,
     tags,
+    location,
+    biddingEnds,
   }) => {
-    console.log(features);
     if (isImageUploading)
       return toast.warning("Please wait for images to upload");
 
@@ -78,8 +111,8 @@ const CreateListingPage = () => {
       variables: {
         object: {
           long_description: longDescription,
-          minimum_increment: minimumIncrement,
-          minimum_price: minimumPrice,
+          minimum_increment: parseInt(minimumIncrement),
+          minimum_price: parseInt(minimumPrice),
           short_description: shortDescription,
           title,
           listing_images: {
@@ -97,6 +130,12 @@ const CreateListingPage = () => {
               value: tag,
             })),
           },
+          location_zip_code: String(location.zipCode),
+          location_state: location.state,
+          location_country_code: location.countryCode,
+          location_city: location.city,
+          location_address: location.address,
+          bidding_ends: biddingEnds.toISOString(),
         },
       },
     });
@@ -236,10 +275,164 @@ const CreateListingPage = () => {
               </div>
             </div>
 
+            <hr />
+
+            {/* Location Info */}
+            <div className={styles.formRow}>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Location Address */}
+                <label htmlFor="location.address">Street Address*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="location.address"
+                  {...register("location.address", { required: true })}
+                  placeholder="X-123, John Doe Street"
+                />
+                {errors.location?.address && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* City */}
+                <label htmlFor="location.city">City*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="location.city"
+                  {...register("location.city", { required: true })}
+                  placeholder="City"
+                />
+                {errors.location?.city && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className={styles.formRow}>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Zip Code */}
+                <label htmlFor="location.zipCode">Zip Code*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="location.zipCode"
+                  {...register("location.zipCode", { required: true })}
+                  placeholder="123-123"
+                />
+                {errors.location?.zipCode && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* State */}
+                <label htmlFor="location.state">State*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="location.state"
+                  {...register("location.state", { required: true })}
+                  placeholder="State"
+                />
+                {errors.location?.state && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Location Address */}
+                <label htmlFor="location.countryCode">Country*</label>
+                <SelectInput
+                  id="location.countryCode"
+                  name="location.countryCode"
+                  isMulti={false}
+                  options={countryCodeList}
+                  onChange={({ value }) =>
+                    setValue("location.coutryCode", value)
+                  }
+                />
+                {errors.location?.countryCode && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+            </div>
+
             {/* Financial Info */}
             <Alert icon={<RiShoppingBasketFill size={56} color="white" />}>
               You will get 90% of total raised
             </Alert>
+
+            {/* Financial Information */}
+            <div className={styles.formRow}>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Location Address */}
+                <label htmlFor="minimumPrice">Minimum Price*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="minimumPrice"
+                  {...register("minimumPrice", {
+                    required: true,
+                    pattern: /^\d+$/,
+                  })}
+                  placeholder="in GBP"
+                />
+                {errors.location?.address && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Minimum Increment */}
+                <label htmlFor="minimumIncrement">Minimum Increment*</label>
+                <input
+                  type="text"
+                  className="text-input"
+                  id="minimumIncrement"
+                  {...register("minimumIncrement", {
+                    required: true,
+                    pattern: /^\d+$/,
+                  })}
+                  placeholder="Lowest amount someone could bid at once"
+                />
+                {errors.location?.city && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+              <div className={[styles.formGroup, "formGroup"].join(" ")}>
+                {/* Bidding Ending Time */}
+                <label htmlFor="biddingEnds">Bidding ending time*</label>
+                <div className="text-input">
+                  <DatePicker
+                    onChange={(date) => {
+                      setValue("biddingEnds", date);
+                      setDate(date);
+                    }}
+                    style={{ border: "none" }}
+                    showTimeSelect
+                    selected={date}
+                    filterTime={filterPassedTime}
+                    dateFormat="MMMM d, yyyy h:mm aa"
+                  />
+                </div>
+                {errors.location?.city && (
+                  <span className={styles.errorMessage}>
+                    This field is required
+                  </span>
+                )}
+              </div>
+            </div>
 
             {/* Submit */}
             <button
@@ -293,7 +486,6 @@ const FileUpload = ({
         if (res.secure_url) {
           setImages([...images, res.secure_url]);
         } else {
-          console.log();
           toast.error("Image upload resulted in an error");
         }
       }
@@ -329,7 +521,7 @@ const FileUpload = ({
         <div className={styles.imagesWrapper}>
           {/* Images */}
           {images.map((image, i) => (
-            <div className={styles.item} key={i}>
+            <div className={styles.item} key={uuid()}>
               <div className={styles.imageWrapper}>
                 <Image
                   src={image}
@@ -370,13 +562,13 @@ const FileUpload = ({
   );
 };
 
-const SelectInput = ({ name, options, onChange }) => (
+const SelectInput = ({ name, options, onChange, isMulti = true }) => (
   <Select
     id={name}
     name={name}
     options={options}
     onChange={onChange}
-    isMulti
+    isMulti={isMulti}
     isSearchable
     styles={{
       control: (provided) => ({

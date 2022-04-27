@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { v4 as uuid } from "uuid";
 
 const ImageViewer = ({ images }) => {
   // State management
@@ -23,7 +24,7 @@ const ImageViewer = ({ images }) => {
         {images?.map((image, i) => (
           <ImageItem
             isActive={i === activeImage.idx}
-            key={i}
+            key={uuid()}
             onClick={() => setActiveImage({ uri: image, idx: i })}
             src={image}
           />

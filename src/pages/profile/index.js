@@ -27,7 +27,7 @@ const ProfilePage = () => {
         <>
           <p>User Id: {profileData?.id}</p>
           <h1>{profileData?.name}</h1>
-          <p>Joined: {profileData?.created_at}</p>
+          <p>Joined: {getDateFromTimestamp(profileData?.created_at)}</p>
           <p>
             Total Listings: {profileData.listings_aggregate?.aggregate?.count}
           </p>

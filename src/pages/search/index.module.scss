@@ -1,0 +1,16 @@
+.four0four {
+  width: 100%;
+  min-height: 70vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+
+  p {
+    color: $tertiary-main;
+    max-width: 220px;
+    text-align: center;
+  }
+}

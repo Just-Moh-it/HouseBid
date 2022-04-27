@@ -54,7 +54,7 @@ export default NextAuth({
       const isUserSignedIn = user ? true : false;
 
       // Create user on api
-      const res = await fetch("https://house-bid.hasura.app/v1/graphql", {
+      await fetch("https://house-bid.hasura.app/v1/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -74,6 +74,7 @@ export default NextAuth({
             object: {
               id: token.sub,
               name: token.name,
+              image_uri: token?.image,
             },
           },
         }),
