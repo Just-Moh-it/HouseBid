@@ -30,7 +30,7 @@ export const countDown = (timestamp) => {
 };
 
 export const getCountryNameByCode = (code) => {
-  return countryCodeList.filter((x) => x.value === code)[0].label;
+  return countryCodeList.filter((x) => x.value === code)[0]?.label;
 };
 export const getTagInfoByValue = (value) => {
   return tagOptions.filter((x) => x.value === value)[0];

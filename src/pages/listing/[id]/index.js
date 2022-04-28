@@ -109,7 +109,7 @@ const PropertyPage = ({ id }) => {
                       tags={listingData.listing_tags.map(
                         ({ tag: { value } }) => {
                           const vals = getTagInfoByValue(value);
-                          return { icon: vals.icon, name: vals.label };
+                          return { icon: vals?.icon, name: vals?.label };
                         }
                       )}
                       side={[
